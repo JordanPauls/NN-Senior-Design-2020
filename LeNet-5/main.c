@@ -8,7 +8,7 @@
 #define FILE_TEST_IMAGE		"t10k-images.idx3-ubyte"
 #define FILE_TEST_LABEL		"t10k-labels.idx1-ubyte"
 #define LENET_FILE 		"model.dat"
-#define COUNT_TRAIN		60000
+#define COUNT_TRAIN		696969
 #define COUNT_TEST		10000
 
 
