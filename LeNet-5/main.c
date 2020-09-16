@@ -1,4 +1,4 @@
-﻿#include "lenet.h"
+﻿#include "lenet.h" //hi
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -7,7 +7,7 @@
 #define FILE_TRAIN_LABEL		"train-labels.idx1-ubyte"
 #define FILE_TEST_IMAGE		"t10k-images.idx3-ubyte"
 #define FILE_TEST_LABEL		"t10k-labels.idx1-ubyte"
-#define LENET_FILE 		"model.dat"
+#define LENET_FILE 		"model.txt"
 #define COUNT_TRAIN		60000
 #define COUNT_TEST		10000
 
@@ -52,7 +52,7 @@ int testing(LeNet5 *lenet, image *test_data, uint8 *test_label,int total_size)
 
 int save(LeNet5 *lenet, char filename[])
 {
-	FILE *fp = fopen(filename, "wb");
+	FILE *fp = fopen(filename, "w");
 	if (!fp) return 1;
 	fwrite(lenet, sizeof(LeNet5), 1, fp);
 	fclose(fp);
@@ -102,7 +102,7 @@ void foo()
 	int right = testing(lenet, test_data, test_label, COUNT_TEST);
 	printf("%d/%d\n", right, COUNT_TEST);
 	printf("Time:%u\n", (unsigned)(clock() - start));
-	//save(lenet, LENET_FILE);
+	save(lenet, LENET_FILE);
 	free(lenet);
 	free(train_data);
 	free(train_label);
