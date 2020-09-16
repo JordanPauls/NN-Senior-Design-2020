@@ -1,4 +1,6 @@
-﻿#include "lenet.h"
+//Kevin's File
+
+#include "lenet.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -9,7 +11,7 @@
 #define FILE_TEST_LABEL		"t10k-labels-idx1-ubyte"
 #define LENET_FILE 		"model.dat"
 #define COUNT_TRAIN		60000
-#define COUNT_TEST		10000
+#define COUNT_TEST		0000
 
 
 int read_data(unsigned char(*data)[28][28], unsigned char label[], const int count, const char data_file[], const char label_file[])
