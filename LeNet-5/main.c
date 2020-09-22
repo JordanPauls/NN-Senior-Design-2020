@@ -11,6 +11,10 @@
 #define COUNT_TRAIN		60000
 #define COUNT_TEST		10000
 
+/*#define FILE_TEST_IMAGE		"ThreeOut.idx3-ubyte"
+#define FILE_TEST_LABEL		"threelabel.idx1-ubyte"
+#define COUNT_TEST			1 */
+
 
 int read_data(unsigned char(*data)[28][28], unsigned char label[], const int count, const char data_file[], const char label_file[])
 {
@@ -19,6 +23,7 @@ int read_data(unsigned char(*data)[28][28], unsigned char label[], const int cou
     if (!fp_image||!fp_label) return 1;
 	fseek(fp_image, 16, SEEK_SET);
 	fseek(fp_label, 8, SEEK_SET);
+	//fseek(fp_image, 116, SEEK_SET);
 	fread(data, sizeof(*data)*count, 1, fp_image);
 	fread(label,count, 1, fp_label);
 	fclose(fp_image);
@@ -42,7 +47,9 @@ int testing(LeNet5 *lenet, image *test_data, uint8 *test_label,int total_size)
 	for (int i = 0; i < total_size; ++i)
 	{
 		uint8 l = test_label[i];
+		printf("label: %u\n", l);
 		int p = Predict(lenet, test_data[i], 10);
+		//printf("prediction: %d\n", p);
 		right += l == p;
 		if (i * 100 / total_size > percent)
 			printf("test:%2d%%\n", percent = i * 100 / total_size);
