@@ -1,0 +1,11 @@
+close all;clear;clc;
+x = imread('four.png');
+y = imread('three.png');
+xbw = x(:,:,1);
+ybw = y(:,:,1);
+combinedbw = [xbw ybw];
+imshow(combinedbw);
+%imshow(xbw);
+%save('ThreeOut.idx3-ubyte','x');
+fid = fopen('demopics.idx3-ubyte', 'wb');
+COUNT = fwrite(fid, combinedbw, 'uint8', 'b');

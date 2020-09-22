@@ -208,6 +208,7 @@ static uint8 get_result(Feature *features, uint8 count)
 			result = i;
 		}
 	}
+	printf("prediction: %u\n", result);
 	return result;
 }
 
