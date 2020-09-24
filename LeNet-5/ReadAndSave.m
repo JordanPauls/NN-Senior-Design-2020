@@ -1,11 +1,13 @@
 close all;clear;clc;
-x = imread('four.png');
-y = imread('three.png');
-xbw = x(:,:,1);
-ybw = y(:,:,1);
-combinedbw = [xbw ybw];
-imshow(combinedbw);
-%imshow(xbw);
-%save('ThreeOut.idx3-ubyte','x');
-fid = fopen('demopics.idx3-ubyte', 'wb');
-COUNT = fwrite(fid, combinedbw, 'uint8', 'b');
+Digits = imread('TestingData\PencilDigits\0.png');
+for i = 1:9
+    temp = imread(strcat('TestingData\PencilDigits\',string(i),'.png'));
+    Digits = cat(2,Digits,temp);
+end
+
+combinedbw = Digits(:,:,1);
+% figure
+% imshow(combinedbw)
+
+% fid = fopen('demopics.idx3-ubyte', 'wb');
+% COUNT = fwrite(fid, combinedbw, 'uint8', 'b');

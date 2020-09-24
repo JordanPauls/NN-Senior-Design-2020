@@ -1,0 +1,19 @@
+close all;clear;clc;
+Digits = imread('PencilDigits\0.png');
+for i = 1:9
+    temp = imread(strcat('PencilDigits\',i,'.png'));
+    Digits = cat(2,Digits,temp);
+end
+
+figure
+imshow(Digits)
+
+combinedbw = Digits(:,:,1);
+
+figure
+imshow(combinedbw)
+
+%imshow(xbw);
+%save('ThreeOut.idx3-ubyte','x');
+fid = fopen('demopics.idx3-ubyte', 'wb');
+COUNT = fwrite(fid, combinedbw, 'uint8', 'b');
