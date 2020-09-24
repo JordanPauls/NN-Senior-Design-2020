@@ -1,13 +1,14 @@
 close all;clear;clc;
-Digits = imread('TestingData\PencilDigits\0.png');
-for i = 1:9
-    temp = imread(strcat('TestingData\PencilDigits\',string(i),'.png'));
-    Digits = cat(2,Digits,temp);
+names = {'3' '9p' '4' '5' '1p' '7' '6p' '5p' '2' '3p' '8p' '0' '6' '2p' '4p' '8' '0p' '7' '1' '9'};
+HandDigits = imread(strcat('TestingData\AllDigits\',names{1},'.png'));
+for i = 2:20
+    temp = imread(strcat('TestingData\AllDigits\',names{i},'.png'));
+    HandDigits = cat(2,HandDigits,temp);
 end
 
-combinedbw = Digits(:,:,1);
-% figure
-% imshow(combinedbw)
+combinedbw = HandDigits(:,:,1);
+figure
+imshow(combinedbw)
 
-% fid = fopen('demopics.idx3-ubyte', 'wb');
-% COUNT = fwrite(fid, combinedbw, 'uint8', 'b');
+fid = fopen('TestingData\demopics.idx3-ubyte', 'wb');
+COUNT = fwrite(fid, combinedbw, 'uint8', 'b');
