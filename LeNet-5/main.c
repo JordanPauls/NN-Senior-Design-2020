@@ -5,15 +5,15 @@
 
 #define FILE_TRAIN_IMAGE		"train-images.idx3-ubyte"
 #define FILE_TRAIN_LABEL		"train-labels.idx1-ubyte"
-//#define FILE_TEST_IMAGE		"t10k-images.idx3-ubyte"
-//#define FILE_TEST_LABEL		"t10k-labels.idx1-ubyte"
+//#define FILE_TEST_IMAGE		"TestingData/t10k-images.idx3-ubyte"
+//#define FILE_TEST_LABEL		"TestingData/t10k-labels.idx1-ubyte"
 #define LENET_FILE 		"model.dat"
 #define COUNT_TRAIN		60000
 //#define COUNT_TEST		10000
 
 #define FILE_TEST_IMAGE		"TestingData/demopics.idx3-ubyte"  //Must add directory, file is in a subfolder
 #define FILE_TEST_LABEL		"TestingData/demolabel.idx1-ubyte" //Must add directory, file is in a subfolder
-#define COUNT_TEST		20
+#define COUNT_TEST			20
 
 int read_data(unsigned char(*data)[28][28], unsigned char label[], const int count, const char data_file[], const char label_file[])
 {
@@ -39,8 +39,8 @@ int testing(LeNet5 *lenet, image *test_data, uint8 *test_label,int total_size)
 		printf("label: %u\n", l);
 		int p = Predict(lenet, test_data[i], 10);
 		right += l == p;
-		if (i * 100 / total_size > percent)
-			printf("test:%2d%%\n", percent = i * 100 / total_size);
+		//if (i * 100 / total_size > percent)
+			//printf("test:%2d%%\n", percent = i * 100 / total_size);
 	}
 	return right;
 }
