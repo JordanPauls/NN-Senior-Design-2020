@@ -199,6 +199,7 @@ static uint8 get_result(Feature *features, uint8 count)
 	double *output = (double *)features->output; 
 	const int outlen = GETCOUNT(features->output);
 	uint8 result = 0;
+	printf("0: %7.6f ", output[0]);
 	double maxvalue = *output;
 	for (uint8 i = 1; i < count; ++i)
 	{
@@ -207,8 +208,9 @@ static uint8 get_result(Feature *features, uint8 count)
 			maxvalue = output[i];
 			result = i;
 		}
+		printf("%u: %7.6f ", i, output[i]);
 	}
-	printf("prediction: %u\n", result);
+	printf(" prediction: %u\n", result);
 	return result;
 }
 

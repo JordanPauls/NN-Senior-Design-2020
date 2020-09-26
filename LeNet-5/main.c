@@ -3,14 +3,12 @@
 #include <stdio.h>
 #include <time.h>
 
-#define FILE_TRAIN_IMAGE		"train-images.idx3-ubyte"
-#define FILE_TRAIN_LABEL		"train-labels.idx1-ubyte"
-//#define FILE_TEST_IMAGE		"TestingData/t10k-images.idx3-ubyte"
-//#define FILE_TEST_LABEL		"TestingData/t10k-labels.idx1-ubyte"
 #define LENET_FILE 		"model.dat"
-#define COUNT_TRAIN		60000
-//#define COUNT_TEST		10000
-
+/*
+#define FILE_TEST_IMAGE		"TestingData/t10k-images.idx3-ubyte"
+#define FILE_TEST_LABEL		"TestingData/t10k-labels.idx1-ubyte"
+#define COUNT_TEST		10000
+*/
 #define FILE_TEST_IMAGE		"TestingData/demopics.idx3-ubyte"  //Must add directory, file is in a subfolder
 #define FILE_TEST_LABEL		"TestingData/demolabel.idx1-ubyte" //Must add directory, file is in a subfolder
 #define COUNT_TEST			20
