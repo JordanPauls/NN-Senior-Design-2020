@@ -210,7 +210,7 @@ static uint8 get_result(Feature *features, uint8 count)
 		}
 		printf("%u: %7.6f ", i, output[i]);
 	}
-	printf(" prediction: %u\n", result);
+	printf(" \nprediction: %u\n", result);
 	return result;
 }
 

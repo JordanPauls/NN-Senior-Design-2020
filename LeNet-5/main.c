@@ -34,7 +34,7 @@ int testing(LeNet5 *lenet, image *test_data, uint8 *test_label,int total_size)
 	for (int i = 0; i < total_size; ++i)
 	{
 		uint8 l = test_label[i];
-		printf("label: %u\n", l);
+		printf("\nlabel: %u\n", l);
 		int p = Predict(lenet, test_data[i], 10);
 		right += l == p;
 		//if (i * 100 / total_size > percent)
