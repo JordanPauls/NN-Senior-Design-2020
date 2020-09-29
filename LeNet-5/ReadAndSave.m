@@ -12,10 +12,10 @@ combinedbwNew = 255-combinedbw;
 figure
 subplot(1,2,1)
 imshow(combinedbw)
-title('old')
+title('Raw')
 subplot(1,2,2)
 imshow(combinedbwNew)
-title('new')
+title('Colors Inverted')
 
 fid = fopen('TestingData\demopics.idx3-ubyte', 'wb');
 COUNT = fwrite(fid, combinedbwNew', 'uint8', 'b');  %transpose before sending in binary!!!
