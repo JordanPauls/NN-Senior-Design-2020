@@ -286,3 +286,7 @@ void Initial(LeNet5 *lenet)
 	for (double *pos = (double *)lenet->weight5_6; pos < (double *)lenet->bias0_1; *pos++ *= sqrt(6.0 / (LAYER5 + OUTPUT)));
 	for (int *pos = (int *)lenet->bias0_1; pos < (int *)(lenet + 1); *pos++ = 0);
 }
+
+void SVDFunc(LeNet5* lenet) {
+	//Put entire SVD operation here
+}
