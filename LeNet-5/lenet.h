@@ -39,17 +39,17 @@ void Initial(LeNet5 *lenet);
 #define ALPHA 0.5
 #define PADDING 2
 
+#define SVDPARAM 100
+
 
 typedef unsigned char uint8;
 typedef uint8 image[28][28];
-
 
 typedef struct LeNet5
 {
 	double weight0_1[INPUT][LAYER1][LENGTH_KERNEL][LENGTH_KERNEL];
 	double weight2_3[LAYER2][LAYER3][LENGTH_KERNEL][LENGTH_KERNEL];
 	double weight4_5[LAYER4][LAYER5][LENGTH_KERNEL][LENGTH_KERNEL];
-	//Need to add a layer here
 	double weight5_6[LAYER5 * LENGTH_FEATURE5 * LENGTH_FEATURE5][OUTPUT];
 
 	double bias0_1[LAYER1];
@@ -63,15 +63,21 @@ typedef struct LeNet5_SVD
 {
 	double weight0_1[INPUT][LAYER1][LENGTH_KERNEL][LENGTH_KERNEL];
 	double weight2_3[LAYER2][LAYER3][LENGTH_KERNEL][LENGTH_KERNEL];
-	double weight4_5[LAYER4][LAYER5][LENGTH_KERNEL][LENGTH_KERNEL]; //replace this weight matrix with TWO smaller weights matrices
-	double weight5_6[LAYER5 * LENGTH_FEATURE5 * LENGTH_FEATURE5][OUTPUT];
+
+	//double weight4_5[LAYER4][LAYER5][LENGTH_KERNEL][LENGTH_KERNEL];//old
+	double SVD1[LAYER4][SVDPARAM][LENGTH_KERNEL][LENGTH_KERNEL];
+	double SVD2[SVDPARAM][LAYER5];
+
+	double weight5_6[LAYER5 * LENGTH_FEATURE5 * LENGTH_FEATURE5][OUTPUT]; //old
 
 	double bias0_1[LAYER1];
 	double bias2_3[LAYER3];
-	double bias4_5[LAYER5];
+	double biasSVD[SVDPARAM]; //added
+	double bias4_5[LAYER5]; //Keep an eye on this bias layer.
 	double bias5_6[OUTPUT];
 
-}LeNet5;
+}LeNet5_SVD;
+
 
 typedef struct Feature
 {
@@ -91,10 +97,10 @@ typedef struct FeatureSVD
 	double layer2[LAYER2][LENGTH_FEATURE2][LENGTH_FEATURE2];
 	double layer3[LAYER3][LENGTH_FEATURE3][LENGTH_FEATURE3];
 	double layer4[LAYER4][LENGTH_FEATURE4][LENGTH_FEATURE4];//add layer after here
-		double SVDLayer[k]; //added layer
+		double SVDLayer[SVDPARAM]; //added layer
 	double layer5[LAYER5][LENGTH_FEATURE5][LENGTH_FEATURE5];//add layer before here
 	double output[OUTPUT];
-}Feature;
+}FeatureSVD;
 
 void TrainBatch(LeNet5 *lenet, image *inputs, uint8 *labels, int batchSize);
 

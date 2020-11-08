@@ -137,6 +137,18 @@ static void forward(LeNet5 *lenet, Feature *features, double(*action)(double))
 	DOT_PRODUCT_FORWARD(features->layer5, features->output, lenet->weight5_6, lenet->bias5_6, action);
 }
 
+static void forwardSVD(LeNet5_SVD* lenetSVD, FeatureSVD* featuresSVD, double(*action)(double))
+{
+	CONVOLUTION_FORWARD(featuresSVD->input, featuresSVD->layer1, lenetSVD->weight0_1, lenetSVD->bias0_1, action);
+	SUBSAMP_MAX_FORWARD(featuresSVD->layer1, featuresSVD->layer2);
+	CONVOLUTION_FORWARD(featuresSVD->layer2, featuresSVD->layer3, lenetSVD->weight2_3, lenetSVD->bias2_3, action);
+	SUBSAMP_MAX_FORWARD(featuresSVD->layer3, featuresSVD->layer4);
+	// old  CONVOLUTION_FORWARD(featuresSVD->layer4, featuresSVD->layer5, lenetSVD->weight4_5, lenetSVD->bias4_5, action);//old
+	CONVOLUTION_FORWARD(featuresSVD->layer4,   featuresSVD->SVDLayer, lenetSVD->SVD1, lenetSVD->biasSVD, action); //maybe change action from ReLU?
+	CONVOLUTION_FORWARD(featuresSVD->SVDLayer, featuresSVD->layer5,   lenetSVD->SVD2, lenetSVD->bias4_5, action);
+	DOT_PRODUCT_FORWARD(featuresSVD->layer5, featuresSVD->output, lenetSVD->weight5_6, lenetSVD->bias5_6, action);
+}
+
 static void backward(LeNet5 *lenet, LeNet5 *deltas, Feature *errors, Feature *features, double(*actiongrad)(double))
 {
 	DOT_PRODUCT_BACKWARD(features->layer5, errors->layer5, errors->output, lenet->weight5_6, deltas->weight5_6, deltas->bias5_6, actiongrad);
@@ -275,6 +287,15 @@ uint8 Predict(LeNet5 *lenet, image input,uint8 count)
 	load_input(&features, input);
 	forward(lenet, &features, relu);
 	return get_result(&features, count);
+}
+
+//Added
+uint8 PredictSVD(LeNet5_SVD *lenetSVD, image input, uint8 count)
+{
+	FeatureSVD featuresSVD = { 0 };
+	load_input(&featuresSVD, input);
+	forwardSVD(lenetSVD, &featuresSVD, relu);
+	return get_result(&featuresSVD, count);
 }
 
 void Initial(LeNet5 *lenet)
