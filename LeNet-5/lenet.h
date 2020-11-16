@@ -29,10 +29,10 @@ void Initial(LeNet5 *lenet);
 #define LENGTH_FEATURE5	(LENGTH_FEATURE4 - LENGTH_KERNEL + 1)
 
 #define INPUT			1
-#define LAYER1			6
-#define LAYER2			6
-#define LAYER3			16
-#define LAYER4			16
+#define LAYER1			12
+#define LAYER2			12
+#define LAYER3			120
+#define LAYER4			120
 #define LAYER5			120
 #define OUTPUT          10
 

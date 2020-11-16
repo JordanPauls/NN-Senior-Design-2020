@@ -4,21 +4,22 @@
 #include <time.h>
 
 #define LENET_FILE 		"model.dat"
-/*
+
 #define FILE_TEST_IMAGE		"TestingData/t10k-images.idx3-ubyte"
 #define FILE_TEST_LABEL		"TestingData/t10k-labels.idx1-ubyte"
-#define COUNT_TEST		10000
-*/
+#define COUNT_TEST		100
+
+/*
 #define FILE_TEST_IMAGE		"TestingData/demopics.idx3-ubyte"  //Must add directory, file is in a subfolder
 #define FILE_TEST_LABEL		"TestingData/demolabel.idx1-ubyte" //Must add directory, file is in a subfolder
 #define COUNT_TEST			20
-
+*/
 int read_data(unsigned char(*data)[28][28], unsigned char label[], const int count, const char data_file[], const char label_file[])
 {
     FILE *fp_image = fopen(data_file, "rb");
     FILE *fp_label = fopen(label_file, "rb");
     if (!fp_image||!fp_label) return 1;
-	//fseek(fp_image, 16, SEEK_SET);
+	fseek(fp_image, 16, SEEK_SET);
 	fseek(fp_label, 8, SEEK_SET);
 	fread(data, sizeof(*data)*count, 1, fp_image);
 	fread(label,count, 1, fp_label);
